@@ -129,6 +129,7 @@ class ScanStats(object):
 	@classmethod
 	def fromWindows(cls, fileName, f):
 		self = cls(fileName, f)
+		# Don't strip the lines (spaces matter)
 		lines = f.readlines()
 		for lineNum, line in enumerate(lines):
 			if line.startswith("xcp scan"):
@@ -156,7 +157,8 @@ class ScanStats(object):
 	@classmethod
 	def fromCSV(cls, fileName, f):
 		self = cls(fileName, f)
-		lines = f.readlines()
+		# Do strip the lines
+		lines = [l.strip() for l in f.readlines()]
 		self.skip1 = None
 		for lineNum, line in enumerate(lines):
 			if self.skip1:
