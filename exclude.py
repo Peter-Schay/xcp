@@ -29,7 +29,7 @@ nExcluded = 0
 def run(argv):
     # The first argument after "xcp diag -run exclude.py" is argv[1]
     if len(argv) < 2:
-        sys.exit("missing condition expression for paths to exclude\n")
+        sys.exit("missing condition expression for dirs to exclude\n")
 
     s = argv[1]
     try:
@@ -57,8 +57,6 @@ def run(argv):
         return origInit(*args, **kwargs)
     scan.ScanTree.__init__ = customInit
 
-    print("argv {}".format(argv))
     newargv = ["xcp"] + argv[2:]
-    print("newargv {}".format(newargv))
     xcp.xcp(newargv)
     sys.stderr.write("excluded {} dirs\n".format(nExcluded))
