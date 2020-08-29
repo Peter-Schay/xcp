@@ -28,16 +28,15 @@ nExcluded = 0
 
 def run(argv):
     # The first argument after "xcp diag -run exclude.py" is argv[1]
-    if len(argv) > 1:
-        s = argv[1]
-        try:
-            filter = xfilter.Filter(s, sched.engine.osCache, when=time.time())
-        except Exception as e:
-            raise sched.ShortError("Error in filter <{}>: {}".format(s, e))
-        sys.stderr.write("excluding dirs which match {}\n".format(s))
-    else:
-        sys.stderr.write("expected condition expression for paths to exclude\n")
-        sys.exit(1)
+    if len(argv) < 2:
+        sys.exit("missing condition expression for paths to exclude\n")
+
+    s = argv[1]
+    try:
+        filter = xfilter.Filter(s, sched.engine.osCache, when=time.time())
+    except Exception as e:
+        raise sched.ShortError("Error in filter <{}>: {}".format(s, e))
+    sys.stderr.write("excluding dirs which match {}\n".format(s))
 
     class Exclude(sched.SimpleTask):
         def gRun(self, d):
