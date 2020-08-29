@@ -10,7 +10,7 @@
 # The script dynamically adds a hook to the scanner, for any xcp command.  
 # The hook will test the exclude condition expression and skip all dirs for which the condition is true.
 # The exclude condition uses the same variables and syntax as a -match or -fmt expresssion.
-# For example this command will run the scan and skip any directory that's deeper than 2 or named "bogus":
+# For example this command will run the scan and skip any directory that's deeper than 2 or named "skipme":
 #
 # xcp diag -run exclude.py 'depth > 2 or name == "skipme"' scan localhost:/usr/lib
 
