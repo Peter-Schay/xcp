@@ -293,7 +293,7 @@ if __name__ == "__main__":
 
 		def mkline(row):
 			s = ','.join(fmt(item) for item in row)
-			return s + '\n'
+			return (s + '\n').encode('ascii')
 		
 		f.write(mkline(header0))
 		f.write(mkline(header))
